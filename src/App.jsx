@@ -6,6 +6,8 @@ import Swaps from "./components/pages/Swaps";
 import Admin from "./components/pages/Admin";
 import Navbar from "./components/Navbar";
 import Login from "./components/pages/Login";
+import ViewProfile from "./components/ViewProfile";
+
 
 
 export default function App() {
@@ -14,10 +16,11 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
         <Route path="/swaps" element={<Swaps />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
+<Route path="/user/:name" element={<ViewProfile />} />
 
 
       </Routes>

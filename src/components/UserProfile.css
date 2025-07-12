@@ -1,0 +1,62 @@
+.profile-container {
+  background-color: #111;
+  color: white;
+  padding: 1rem;
+  max-width: 600px;
+  margin: auto;
+  border: 1px solid #666;
+  border-radius: 12px;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.nav-links button {
+  margin-right: 1rem;
+  color: #fff;
+  background: none;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.save-btn {
+  color: green;
+}
+.discard-btn {
+  color: red;
+}
+
+.nav-right button {
+  background-color: #444;
+  color: #fff;
+  margin-right: 0.5rem;
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+
+.profile-pic {
+  width: 36px;
+  border-radius: 50%;
+}
+
+.profile-body {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.profile-fields {
+  flex: 2;
+}
+
+.profile-photo img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
