@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./Profile.css";
 
 export default function Profile() {
   const user = localStorage.getItem("user");
@@ -13,7 +14,6 @@ export default function Profile() {
   });
   const [editing, setEditing] = useState(false);
 
-  // Load profile if exists
   useEffect(() => {
     if (!user) return;
     axios.get("http://localhost:5000/api/users").then((res) => {
@@ -38,37 +38,22 @@ export default function Profile() {
   };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto text-white bg-black min-h-screen rounded-lg border border-gray-700">
-      {/* Navigation (Top Right) */}
-      <div className="flex justify-between items-center mb-6">
-        <div>
+    <div className="profile-container">
+      {/* Top Navigation */}
+      <div className="profile-header">
+        <div className="actions">
           {editing ? (
-            <div className="flex gap-4 text-sm">
-              <button
-                onClick={handleSave}
-                className="text-green-400 hover:underline"
-              >
-                Save
-              </button>
-              <button
-                onClick={handleDiscard}
-                className="text-red-400 hover:underline"
-              >
-                Discard
-              </button>
-            </div>
+            <>
+              <button onClick={handleSave}>Save</button>
+              <button onClick={handleDiscard}>Discard</button>
+            </>
           ) : (
-            <button
-              onClick={() => setEditing(true)}
-              className="text-blue-400 hover:underline text-sm"
-            >
-              Edit Profile
-            </button>
+            <button onClick={() => setEditing(true)}>Edit Profile</button>
           )}
         </div>
-        <div className="flex items-center gap-4">
-          <a href="/swaps" className="hover:underline">Swap Requests</a>
-          <a href="/" className="hover:underline">Home</a>
+        <div className="actions">
+          <a href="/swaps">Swap Requests</a>
+          <a href="/">Home</a>
           <img
             src={`https://ui-avatars.com/api/?name=${user}`}
             alt="Profile"
@@ -77,31 +62,24 @@ export default function Profile() {
         </div>
       </div>
 
-      {/* Profile Fields */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      {/* Profile Info */}
+      <div className="profile-grid">
         {/* Left Column */}
-        <div className="space-y-4">
-          <div>
-            <label className="block font-semibold">Name</label>
-            <input
-              disabled
-              value={form.name}
-              className="bg-gray-800 text-white p-2 rounded w-full"
-            />
+        <div>
+          <div className="profile-field">
+            <label>Name</label>
+            <input disabled value={form.name} />
           </div>
-          <div>
-            <label className="block font-semibold">Location</label>
+          <div className="profile-field">
+            <label>Location</label>
             <input
               disabled={!editing}
               value={form.location}
-              onChange={(e) =>
-                setForm({ ...form, location: e.target.value })
-              }
-              className="bg-gray-800 text-white p-2 rounded w-full"
+              onChange={(e) => setForm({ ...form, location: e.target.value })}
             />
           </div>
-          <div>
-            <label className="block font-semibold">Skills Offered</label>
+          <div className="profile-field">
+            <label>Skills Offered</label>
             <input
               disabled={!editing}
               value={form.skillsOffered.join(", ")}
@@ -111,55 +89,52 @@ export default function Profile() {
                   skillsOffered: e.target.value.split(",").map((s) => s.trim()),
                 })
               }
-              className="bg-gray-800 text-white p-2 rounded w-full"
             />
           </div>
-          <div>
-            <label className="block font-semibold">Availability</label>
+          <div className="profile-field">
+            <label>Availability</label>
             <input
               disabled={!editing}
               value={form.availability}
               onChange={(e) =>
                 setForm({ ...form, availability: e.target.value })
               }
-              className="bg-gray-800 text-white p-2 rounded w-full"
             />
           </div>
         </div>
 
         {/* Right Column */}
-        <div className="space-y-4">
-          <div className="text-center">
+        <div>
+          <div className="profile-photo">
             <img
               src={`https://ui-avatars.com/api/?name=${user}&background=random`}
               alt="Profile"
-              className="w-24 h-24 rounded-full mx-auto border"
             />
-            <p className="text-sm mt-1 text-gray-400">Profile Photo</p>
+            <p>Profile Photo</p>
           </div>
-          <div>
-            <label className="block font-semibold">Skills Wanted</label>
+          <div className="profile-field">
+            <label>Skills Wanted</label>
             <input
               disabled={!editing}
               value={form.skillsWanted.join(", ")}
               onChange={(e) =>
                 setForm({
                   ...form,
-                  skillsWanted: e.target.value.split(",").map((s) => s.trim()),
+                  skillsWanted: e.target.value
+                    .split(",")
+                    .map((s) => s.trim()),
                 })
               }
-              className="bg-gray-800 text-white p-2 rounded w-full"
             />
           </div>
-          <div>
-            <label className="block font-semibold">Profile</label>
+          <div className="profile-field">
+            <label>Profile</label>
             <select
               disabled={!editing}
               value={form.isPublic ? "Public" : "Private"}
               onChange={(e) =>
                 setForm({ ...form, isPublic: e.target.value === "Public" })
               }
-              className="bg-gray-800 text-white p-2 rounded w-full"
             >
               <option>Public</option>
               <option>Private</option>
